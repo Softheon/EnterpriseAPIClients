@@ -9,9 +9,9 @@ A collection of libraries for the Softheon Wallet API.  Client libraries are ava
 * [Ruby](https://github.com/Softheon/EnterpriseAPIClients/tree/master/Ruby/generated)
 * [PHP](https://github.com/Softheon/EnterpriseAPIClients/tree/master/PHP/Softheon/Enterprise/Api/Client)
 
-To get started using the Softheon Wallet API, please visit https://hack.softheon.io.
+To get started using the Softheon Enterprise API, please visit https://hack.softheon.io.
 Please also visit the [documentation site](https://hack.softheon.io/documentation/enterprise) for more information on how to use the
-Softheon Wallet API.
+Softheon Enterprise API.
 
 ## Overview
 Client libraries are generated using the [AutoRest](https://github.com/Azure/autorest) open-source REST API client generation tool.  The
