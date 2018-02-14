@@ -30,7 +30,7 @@ Some languages requrie additional client runtimes in order to use these librarie
 [AutoRest client runtime documentation](https://github.com/Azure/autorest/blob/master/docs/developer/architecture/Autorest-and-Clientruntimes.md).
 
 ## Authentication
-In order to make requests to the Softheon Wallet, you must include the `Authorization` request
+In order to make requests to the Softheon Enterprise API, you must include the `Authorization` request
  header with an OAuth 2.0 ***access token***.
 
 Access tokens are provided by the Softheon Wallet authorization server.  To obtain an access
