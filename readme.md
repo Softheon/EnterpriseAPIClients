@@ -1,5 +1,5 @@
 # Softehon Enterprise API Client Libraries
-A collection of libraries for the Softheon Wallet API.  Client libraries are available in the following languages:
+A collection of libraries for the Softheon Enterprise API.  Client libraries are available in the following languages:
 * [C#](https://github.com/Softheon/EnterpriseAPIClients/tree/master/CSharp)
 * [Go](https://github.com/Softheon/EnterpriseAPIClients/tree/master/Go)
 * [Java](https://github.com/Softheon/EnterpriseAPIClients/tree/master/Java)
@@ -15,7 +15,7 @@ Softheon Enterprise API.
 
 ## Overview
 Client libraries are generated using the [AutoRest](https://github.com/Azure/autorest) open-source REST API client generation tool.  The
-input to AutoRest is a spec file that describes the Softheon Wallet API using the [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification).
+input to AutoRest is a spec file that describes the Softheon Enterprise API using the [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification).
 [Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) was used for spec file generation.
 
 ## Getting Started
@@ -33,9 +33,10 @@ Some languages requrie additional client runtimes in order to use these librarie
 In order to make requests to the Softheon Enterprise API, you must include the `Authorization` request
  header with an OAuth 2.0 ***access token***.
 
-Access tokens are provided by the Softheon Wallet authorization server.  To obtain an access
-token, set the `Content-Type` to `application/x-www-form-urlencoded`.  In the request body set `grant_type` to `client_credentials` and
-set the `scope` to `enterpriseapi`.  Set the `client_id` and `client_secret` to your application's client id and client secret.
+Access tokens are provided by the Softheon Identity authorization server.  To obtain an access
+token, set the `Content-Type` to `application/x-www-form-urlencoded`.  In the request body set `grant_type` to `password` and
+set the `scope` to `enterpriseapi openid`.  Set the `client_id` and `client_secret` to your application's client id and client secret.
+Lastly, set the `username` and `password` to the username and password provided to you on the Softheon hack user card.
 
 For more information on requesting access tokens, please refer to the [Softheon Enterprise API OAuth 2 documentation](https://hack.softheon.io/documentation/enterprise/topics/oauth2/).
 
@@ -44,7 +45,7 @@ For more information on requesting access tokens, please refer to the [Softheon 
 var client = new RestClient("https://hack.softheon.io/oauth2/connect/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-request.AddParameter("undefined", "grant_type=client_credentials&scope=enterpriseapi&client_id=<client id>&client_secret=<client secret>", ParameterType.RequestBody);
+request.AddParameter("undefined", "grant_type=password&scope=enterpriseapi%20openid&client_id=<client id>&client_secret=<client secret>&username=<username>&password=<password>", ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);
 ```
 ### Go Example
@@ -62,7 +63,7 @@ func main() {
 
 	url := "https://hack.softheon.io/oauth2/connect/token"
 
-	payload := strings.NewReader("grant_type=client_credentials&scope=enterpriseapi&client_id=client_id=<client id>&client_secret=<client secret>")
+	payload := strings.NewReader("grant_type=password&scope=enterpriseapi%20openid&client_id=client_id=<client id>&client_secret=<client secret>&username=<username>&password=<password>")
 
 	req, _ := http.NewRequest("POST", url, payload)
 
@@ -84,7 +85,7 @@ func main() {
 OkHttpClient client = new OkHttpClient();
 
 MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
-RequestBody body = RequestBody.create(mediaType, "grant_type=client_credentials&scope=enterpriseapi&client_id=<client id>&client_secret=<client secret>");
+RequestBody body = RequestBody.create(mediaType, "grant_type=password&scope=enterpriseapi%20openid&client_id=<client id>&client_secret=<client secret>&username=<username>&password=<password>");
 Request request = new Request.Builder()
   .url("https://hack.softheon.io/oauth2/connect/token")
   .post(body)
@@ -129,10 +130,12 @@ var req = http.request(options, function (res) {
   });
 });
 
-req.write(qs.stringify({ grant_type: 'client_credentials',
-  scope: 'enterpriseapi',
+req.write(qs.stringify({ grant_type: 'password',
+  scope: 'enterpriseapi openid',
   client_id: '<client id>',
-  client_secret: '<client secret>' }));
+  client_secret: '<client secret>',
+  username: '<username>',
+  password: '<password>' }));
 req.end();
 ```
 
@@ -142,7 +145,7 @@ import http.client
 
 conn = http.client.HTTPConnection("hack,softheon,io")
 
-payload = "grant_type=client_credentials&scope=enterpriseapi&client_id=<client id>&client_secret=<client secret>"
+payload = "grant_type=password&scope=enterpriseapi%20openid&client_id=<client id>&client_secret=<client secret>&username=<username>&password=<password>"
 
 headers = {
     'Content-Type': "application/x-www-form-urlencoded",
@@ -167,7 +170,7 @@ http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Post.new(url)
 request["Content-Type"] = 'application/x-www-form-urlencoded'
-request.body = "grant_type=client_credentials&scope=enterpriseapi&client_id=<client id>&client_secret=<client secret>"
+request.body = "grant_type=password&scope=enterpriseapi%20openid&client_id=<client id>&client_secret=<client secret>&username=<username>&password=<password>"
 
 response = http.request(request)
 puts response.read_body
@@ -187,10 +190,12 @@ $request->setHeaders(array(
 
 $request->setContentType('application/x-www-form-urlencoded');
 $request->setPostFields(array(
-  'grant_type' => 'client_credentials',
-  'scope' => 'enterpriseapi',
+  'grant_type' => 'password',
+  'scope' => 'enterpriseapi openid',
   'client_id' => '<client id>',
-  'client_secret' => '<client secret>'
+  'client_secret' => '<client secret>',
+  'username' => '<username>',
+  'password' => '<password>'
 ));
 
 try {
@@ -202,6 +207,6 @@ try {
 }
 ```
 ## Acknowledgements
-The Softheon Wallet API client libraries are built using the following great open source projects
+The Softheon Enterpise API client libraries are built using the following great open source projects
 * [AutoRest](https://github.com/Azure/autorest)
 * [Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
