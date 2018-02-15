@@ -45,7 +45,7 @@ For more information on requesting access tokens, please refer to the [Softheon 
 var client = new RestClient("https://hack.softheon.io/oauth2/connect/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-request.AddParameter("undefined", "grant_type=password&scope=enterpriseapi+openid&client_id=<client id>&client_secret=<client secret>&username=<username>&password=<password>", ParameterType.RequestBody);
+request.AddParameter("undefined", "grant_type=password&scope=enterpriseapi%20openid&client_id=<client id>&client_secret=<client secret>&username=<username>&password=<password>", ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);
 ```
 ### Go Example
@@ -63,7 +63,7 @@ func main() {
 
 	url := "https://hack.softheon.io/oauth2/connect/token"
 
-	payload := strings.NewReader("grant_type=password&scope=enterpriseapi+openid&client_id=client_id=<client id>&client_secret=<client secret>&username=<username>&password=<password>")
+	payload := strings.NewReader("grant_type=password&scope=enterpriseapi%20openid&client_id=client_id=<client id>&client_secret=<client secret>&username=<username>&password=<password>")
 
 	req, _ := http.NewRequest("POST", url, payload)
 
@@ -85,7 +85,7 @@ func main() {
 OkHttpClient client = new OkHttpClient();
 
 MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
-RequestBody body = RequestBody.create(mediaType, "grant_type=password&scope=enterpriseapi+openid&client_id=<client id>&client_secret=<client secret>&username=<username>&password=<password>");
+RequestBody body = RequestBody.create(mediaType, "grant_type=password&scope=enterpriseapi%20openid&client_id=<client id>&client_secret=<client secret>&username=<username>&password=<password>");
 Request request = new Request.Builder()
   .url("https://hack.softheon.io/oauth2/connect/token")
   .post(body)
@@ -145,7 +145,7 @@ import http.client
 
 conn = http.client.HTTPConnection("hack,softheon,io")
 
-payload = "grant_type=password&scope=enterpriseapi+openid&client_id=<client id>&client_secret=<client secret>&username=<username>&password=<password>"
+payload = "grant_type=password&scope=enterpriseapi%20openid&client_id=<client id>&client_secret=<client secret>&username=<username>&password=<password>"
 
 headers = {
     'Content-Type': "application/x-www-form-urlencoded",
@@ -170,7 +170,7 @@ http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Post.new(url)
 request["Content-Type"] = 'application/x-www-form-urlencoded'
-request.body = "grant_type=password&scope=enterpriseapi+openid&client_id=<client id>&client_secret=<client secret>&username=<username>&password=<password>"
+request.body = "grant_type=password&scope=enterpriseapi%20openid&client_id=<client id>&client_secret=<client secret>&username=<username>&password=<password>"
 
 response = http.request(request)
 puts response.read_body
