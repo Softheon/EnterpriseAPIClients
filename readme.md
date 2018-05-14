@@ -1,4 +1,4 @@
-# Softehon Enterprise API Client Libraries
+# Softheon Enterprise API Client Libraries
 A collection of libraries for the Softheon Enterprise API.  Client libraries are available in the following languages:
 * [C#](https://github.com/Softheon/EnterpriseAPIClients/tree/master/CSharp)
 * [Go](https://github.com/Softheon/EnterpriseAPIClients/tree/master/Go)
